@@ -198,7 +198,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+Setup_lsp = function(_, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
   -- many times.
@@ -263,7 +263,7 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 for _, lsp in ipairs(servers) do
   require('lspconfig')[lsp].setup {
-    on_attach = on_attach,
+    on_attach = Setup_lsp,
     capabilities = capabilities,
   }
 end
@@ -279,7 +279,7 @@ table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
 require('lspconfig').sumneko_lua.setup {
-  on_attach = on_attach,
+  on_attach = Setup_lsp,
   capabilities = capabilities,
   settings = {
     Lua = {
