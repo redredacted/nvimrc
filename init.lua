@@ -107,6 +107,8 @@ require('telescope').setup {
   },
 }
 
+require('telescope').load_extension('noice')
+
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
@@ -339,6 +341,7 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = 'neoorg' }
   },
 }
 
