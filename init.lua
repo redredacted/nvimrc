@@ -252,7 +252,7 @@ require('mason').setup()
 
 -- Enable the following language servers
 -- Feel free to add/remove any LSPs that you want here. They will automatically be installed
-local servers = { 'clangd', 'csharp_ls', 'pyright', 'tsserver', 'lua_ls', 'gopls', 'astro', 'tailwindcss' }
+local servers = { 'clangd', 'omnisharp_mono', 'pyright', 'tsserver', 'lua_ls', 'gopls', 'astro', 'tailwindcss' }
 
 -- Ensure the servers above are installed
 require('mason-lspconfig').setup {
@@ -294,7 +294,10 @@ require('lspconfig').lua_ls.setup {
       diagnostics = {
         globals = { 'vim' },
       },
-      workspace = { library = vim.api.nvim_get_runtime_file('', true) },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file('', true),
+        checkThirdParty = false
+      },
       -- Do not send telemetry data containing a randomized but unique identifier
       telemetry = { enable = false },
     },
@@ -341,7 +344,6 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    { name = 'neoorg' }
   },
 }
 
