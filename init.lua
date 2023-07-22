@@ -11,6 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.keymap.set("n", "<SPACE>", "<Nop>")
 vim.g.mapleader = " "
 
 require("lazy").setup({
@@ -56,17 +57,20 @@ require("lazy").setup({
 		end,
 		opts = {}
 	},
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = function()
+      pcall(vim.api.nvim_command, "TSUpdate")
+    end
+  },
 	{
 		"nvim-treesitter/nvim-treesitter-context",
-		dependencies = {
-			{
-				"nvim-treesitter/nvim-treesitter",
-				build = function()
-					pcall(vim.api.nvim_command, "TSUpdate")
-				end
-			}
-		}
+		dependencies = { "nvim-treesitter/nvim-treesitter" }
 	},
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    dependencies = { "nvim-treesitter/nvim-treesitter"}
+  },
 	"lukas-reineke/indent-blankline.nvim",
 	"NMAC427/guess-indent.nvim",
 	"numToStr/Comment.nvim",
@@ -90,6 +94,17 @@ require("lazy").setup({
       --   opts = {}
       -- }
     },
+    opts = function ()
+      require("which-key").register({
+        f = {
+          name = "file",
+          f = { "<cmd>Telescope find_files<cr>", "Find File" },
+          r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" }
+        }
+      }, {
+        prefix = "<leader>"
+      })
+    end
   },
   {
     "nvim-lualine/lualine.nvim",
@@ -112,7 +127,20 @@ require("lazy").setup({
     "ThePrimeagen/harpoon",
     dependencies = {
       "nvim-lua/plenary.nvim"
-    }
+    },
+    opts = function(_, _)
+      require("which-key").register({
+        m = {
+          name = "Harpoon Marks",
+          u = { function() require("harpoon.ui").toggle_quick_menu() end, "Quick Menu UI"},
+          j = { function() require("harpoon.ui").nav_next() end, "Next Mark"},
+          k = { function() require("harpoon.ui").nav_prev() end, "Previous Mark"},
+          m = { function() require("harpoon.mark").add_file() end, "Mark"}
+        }
+      }, {
+        prefix = "<leader>"
+      })
+    end
   },
   "tpope/vim-fugitive"
 })
@@ -132,8 +160,6 @@ vim.opt.tabstop = 2
 vim.opt.termguicolors = true
 vim.opt.relativenumber = true
 vim.cmd.colorscheme('tokyonight')
-
-require("neodev").setup({})
 
 local lsp = require("lsp-zero").preset({})
 
