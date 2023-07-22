@@ -142,7 +142,17 @@ require("lazy").setup({
       })
     end
   },
-  "tpope/vim-fugitive"
+  "tpope/vim-fugitive",
+  {
+    "kylechui/nvim-surround",
+    version = "*",
+    event = "VeryLazy",
+    config = function ()
+      require("nvim-surround").setup({
+        -- setup here 
+      })
+    end
+  }
 })
 
 require("guess-indent").setup({})
@@ -166,13 +176,20 @@ local lsp = require("lsp-zero").preset({})
 lsp.on_attach(function(_, bufnr)
 	-- :help lsp-zero-keybindings
   -- TODO: setup whichkey for this
-	lsp.default_keymaps({ bugger = bufnr })
+	lsp.default_keymaps({
+    bugger = bufnr,
+    preserve_mappings = false
+  })
 end)
 
 require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
 
 lsp.ensure_installed({
 	"lua_ls",
+  "gopls",
+  "eslint",
+  "tsserver",
+  "rust_analyzer",
 })
 
 lsp.setup()
