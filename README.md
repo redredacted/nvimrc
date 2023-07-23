@@ -26,7 +26,7 @@ NVIM_APPNAME=redredacted/nvimrc/ nvim
 
 ### colorscheme
 
-+ [folke/tokyonight.nvim](https://dotfyle.com/plugins/folke/tokyonight.nvim)
++ [AlexvZyl/nordic.nvim](https://dotfyle.com/plugins/AlexvZyl/nordic.nvim)
 ### comment
 
 + [numToStr/Comment.nvim](https://dotfyle.com/plugins/numToStr/Comment.nvim)
@@ -44,6 +44,9 @@ NVIM_APPNAME=redredacted/nvimrc/ nvim
 ### fuzzy-finder
 
 + [nvim-telescope/telescope.nvim](https://dotfyle.com/plugins/nvim-telescope/telescope.nvim)
+### git
+
++ [lewis6991/gitsigns.nvim](https://dotfyle.com/plugins/lewis6991/gitsigns.nvim)
 ### indent
 
 + [NMAC427/guess-indent.nvim](https://dotfyle.com/plugins/NMAC427/guess-indent.nvim)
