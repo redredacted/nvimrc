@@ -17,11 +17,29 @@ vim.g.mapleader = " "
 require("lazy").setup({
 	"folke/which-key.nvim",
 	"folke/neodev.nvim",
-	"folke/tokyonight.nvim",
+  {
+    "AlexvZyl/nordic.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function ()
+      require('nordic').load()
+    end
+  },
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-    opts = {}
+    opts = function ()
+      require("which-key").register(
+      {
+        t = {
+          name = "Todo",
+          t = { "<cmd>TodoTrouble<cr>", "Trouble" }
+        },
+      },
+      {
+        prefix = "<leader>"
+      })
+    end
   },
   {
     "folke/trouble.nvim",
@@ -152,6 +170,10 @@ require("lazy").setup({
         -- setup here 
       })
     end
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    opts = {}
   }
 })
 
@@ -169,7 +191,8 @@ require("nvim-treesitter.configs").setup({
 vim.opt.tabstop = 2
 vim.opt.termguicolors = true
 vim.opt.relativenumber = true
-vim.cmd.colorscheme('tokyonight')
+vim.opt.number = true
+vim.cmd.colorscheme('nordic')
 
 local lsp = require("lsp-zero").preset({})
 
