@@ -209,6 +209,7 @@ lsp.ensure_installed({
   "eslint",
   "tsserver",
   "rust_analyzer",
+  "rnix-lsp",
 })
 
 lsp.setup()
